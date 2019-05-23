@@ -10,7 +10,7 @@
                                 <v-spacer></v-spacer>
                             </v-toolbar>
                             <v-card-text>
-                                <v-form>
+                                <v-form method="post">
                                     <v-text-field prepend-icon="person" label="Name" type="text" v-model='register.name' required></v-text-field>
                                     <v-text-field prepend-icon="email" label="Email" type="email" v-model='register.email' required></v-text-field>
                                     <v-text-field prepend-icon="phone" label="Phone" type="text" v-model='register.phone' required></v-text-field>
@@ -44,22 +44,21 @@
         methods:{
             async signup() {
               try {
-                var config = {
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                };
                 if(this.register.name == '' && this.register.email == '' && this.register.phone == '' && this.register.password == ''){
                   alert('please fill the empty fields !');
                 }else{
-                  const response = await this.$axios.post('http://localhost:3000/users/register',config, {
+                  this.$axios.post('http://localhost:3000/users/register', {
                     name: this.register.name.trim(),
                     email: this.register.email.trim(),
                     phone: this.register.phone.trim(),
                     password: this.register.password.trim()
-                  }).then(
-                    response => {
-                      console.log(response);
-                    }
-                  );
+                  })
+                  .then(function(response) {
+                    console.log(response.data)
+                  })
+                  .catch(function(error) {
+                    console.log(error)
+                  })
                 }
               } catch (e) {
                 console.log(e);
