@@ -42,28 +42,17 @@
             }
         },
         methods:{
-            async signup() {
-              try {
-                if(this.register.name == '' && this.register.email == '' && this.register.phone == '' && this.register.password == ''){
-                  alert('please fill the empty fields !');
-                }else{
-                  this.$axios.post('http://localhost:3000/users/register', {
-                    name: this.register.name.trim(),
-                    email: this.register.email.trim(),
-                    phone: this.register.phone.trim(),
-                    password: this.register.password.trim()
-                  })
-                  .then(function(response) {
-                    console.log(response.data)
-                  })
-                  .catch(function(error) {
-                    console.log(error)
-                  })
-                }
-              } catch (e) {
-                console.log(e);
-              }
+          signup: function () {
+            let data = {
+              name: this.register.name,
+              email: this.register.email,
+              phone: this.register.phone,
+              password: this.register.password,
             }
+            this.$store.dispatch('register', data)
+           .then(() => this.$router.push('/login'))
+           .catch(err => console.log(err))
+         }
         },
     }
 </script>

@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store.js'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import Products from './views/Products.vue'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -26,6 +28,14 @@ export default new Router({
       component: Register
     },
     {
+      path: '/products',
+      name: 'products',
+      component: Products,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -35,3 +45,19 @@ export default new Router({
     }
   ]
 })
+
+
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login')
+  } else {
+    next()
+  }
+})
+
+export default router
