@@ -5,6 +5,9 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Products from './views/Products.vue'
+import Cart from './views/Cart.vue'
+import PaymentSuccess from './views/PaymentSuccess.vue'
+import PaymentFail from './views/PaymentFail.vue'
 
 Vue.use(Router)
 
@@ -31,6 +34,30 @@ let router = new Router({
       path: '/products',
       name: 'products',
       component: Products,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: PaymentSuccess,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/fail',
+      name: 'fail',
+      component: PaymentFail,
       meta: {
         requiresAuth: true
       }

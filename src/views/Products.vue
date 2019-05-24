@@ -31,7 +31,7 @@
 
                       <v-card-actions>
                         <v-list-tile-content>
-                          <v-btn fab dark small color="primary" @click="add_price(product.price)">
+                          <v-btn fab dark small color="primary" @click="add_price(product.name,product.price,product.points)">
                             <v-icon dark>add_shopping_cart</v-icon>
                           </v-btn>
                         </v-list-tile-content>
@@ -88,7 +88,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="green darken-1" flat @click="more_info = false">Cancel</v-btn>
-              <v-btn color="green darken-1" flat><v-icon dark>shopping_cart</v-icon></v-btn>
+              <v-btn color="green darken-1" flat @click="goto_cart"><v-icon dark>shopping_cart</v-icon></v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -133,16 +133,25 @@
               console.log(e);
             }
          },
-         add_price(price){
+         add_price(name,price,points){
            var self = this
            self.price = 0
            self.qty = 0
            self.selected_price = price
+           localStorage.setItem('pname',name)
+           localStorage.setItem('pprice',price)
+           localStorage.setItem('points',points)
            self.more_info = true
          },
          calculate_price(){
            var self = this
            self.price = self.qty*self.selected_price
+         },
+         goto_cart(){
+           var self = this
+           localStorage.setItem('tot_price',self.price)
+           localStorage.setItem('qty',self.qty)
+           this.$router.push('/cart')
          }
         },
         beforeMount() {
