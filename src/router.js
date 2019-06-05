@@ -6,6 +6,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Products from './views/Products.vue'
 import Cart from './views/Cart.vue'
+import Checkout from './views/Checkout.vue'
 import PaymentSuccess from './views/PaymentSuccess.vue'
 import PaymentFail from './views/PaymentFail.vue'
 
@@ -42,6 +43,14 @@ let router = new Router({
       path: '/cart',
       name: 'cart',
       component: Cart,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: Checkout,
       meta: {
         requiresAuth: true
       }

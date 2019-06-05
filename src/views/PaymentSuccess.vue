@@ -55,7 +55,7 @@
               var amount = localStorage.getItem('tot_price')
               var mail = localStorage.getItem('user_mail')
               let config = {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded',
+                headers: {
                   'x-access-token': localStorage.getItem('token')
                 }
               };
@@ -65,6 +65,9 @@
                 user_mail:mail
               },config)
               .then(function (response) {
+                if(response.data.status=='success'){
+                  toastr.success('Email Sent Successfully !');
+                }
                 console.log(response);
               })
               .catch(function (error) {

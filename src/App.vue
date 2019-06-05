@@ -1,7 +1,9 @@
 <template>
   <v-app id="inspire">
     <v-toolbar>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon>
+        <v-icon>card_giftcard</v-icon>
+      </v-toolbar-side-icon>
       <v-toolbar-title>Gift Shop</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -17,6 +19,12 @@
       </v-toolbar-items>
     </v-toolbar>
     <router-view/>
+    <template>
+      <v-footer class="pa-3">
+        <v-spacer></v-spacer>
+        <div>Kasun Ketawala &copy; {{ new Date().getFullYear() }}</div>
+      </v-footer>
+    </template>
   </v-app>
 </template>
 

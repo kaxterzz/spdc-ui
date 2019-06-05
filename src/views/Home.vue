@@ -1,20 +1,41 @@
 <template>
   <v-app id="inspire">
-    <div class="home">
-      <img alt="Vue logo" src="../assets/logo.png">
-      <HelloWorld msg="Welcome to Your Vue.js App"/>
-    </div>
-  </v-app>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm12 md12>
+            <v-container
+            fluid
+            grid-list-md
+            >
+            <v-layout row wrap>
+              <v-flex
+                md12
+                d-flex
+              >
+                <v-card flat tile class="d-flex">
+                  <v-img
+                    :src="require(`@/assets/images/logo.png`)"
+                    :lazy-src="require(`@/assets/images/logo.png`)"
+                  >
+                    <template v-slot:placeholder>
+                      <v-layout
+                        fill-height
+                        align-center
+                        justify-center
+                        ma-0
+                      >
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-layout>
+                    </template>
+                  </v-img>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</v-app>
 </template>
-
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
-</script>
